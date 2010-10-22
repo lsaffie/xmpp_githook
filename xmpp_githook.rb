@@ -4,6 +4,7 @@
 # Author <luis@saffie.ca>
 
 require 'sinatra'
+require 'xmpp4r-simple'
 
 class XmppGithook < Sinatra::Base
   get '/' do
