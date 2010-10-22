@@ -12,9 +12,8 @@ class XmppGithook < Sinatra::Base
 
   post '/' do
     post = params[:payload]
-    require 'ruby-debug'
-    debugger
-    0
+    im = Jabber::Simple.new("user@jabber.telemonitoring.ca", "user")
+    im.deliver("lsaffie@jabber.telemonitoring.ca", "post.inspect")
   end
 end
 
