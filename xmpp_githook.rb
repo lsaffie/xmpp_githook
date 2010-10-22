@@ -5,6 +5,7 @@
 
 require 'sinatra'
 require 'xmpp4r-simple'
+require 'json'
 
 class XmppGithook < Sinatra::Base
   get '/' do
