@@ -9,6 +9,13 @@ class XmppGithook < Sinatra::Base
   get '/' do
     'hello worldy'
   end
+
+  post '/' do
+    post = params[:payload]
+    require 'ruby-debug'
+    debugger
+    0
+  end
 end
 
 XmppGithook.run!
