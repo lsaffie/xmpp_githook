@@ -8,15 +8,12 @@ require 'xmpp4r-simple'
 require 'json'
 
 class XmppGithook < Sinatra::Base
-  get '/' do
-    'hello worldy'
-  end
-
   post '/' do
     post = params[:payload]
-    message = parse_post(post)
-    im = Jabber::Simple.new("user@jabber.telemonitoring.ca", "user")
-    im.deliver("lsaffie@jabber.telemonitoring.ca", message)
+    if post
+      message = parse_post(post)
+      post_yammer(message)
+    end
   end
 
   def parse_post(post)
@@ -25,6 +22,13 @@ class XmppGithook < Sinatra::Base
     repo = json["repository"]
     string = "#{commit['author']['name']} commited to #{repo["name"]}"
     string
+  end
+
+  def post_yammer(message)
+    require 'yammer4r'
+    config_path = File.dirname(__FILE__) + 'oauth.yml'
+    yammer = Yammer::Client.new(:config => config_path)
+    yammer.message(:post,{:body => message})
   end
 end
 
