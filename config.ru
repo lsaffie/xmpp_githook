@@ -1,3 +1,3 @@
-require 'xmpp_githook'
-
-run XmppGithook.new
+require 'sinatra'
+require './xmpp_githook'
+run Sinatra::Application
