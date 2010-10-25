@@ -3,5 +3,5 @@
 production:
   #Messaging service selector 
   #yammer or jabber
-  service: jabber
+  service: yammer
   jabber_recipients: ["lsaffie@jabber.telemonitoring.ca"]
