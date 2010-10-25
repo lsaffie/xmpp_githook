@@ -10,6 +10,6 @@ post '/' do
   post = params[:payload]
   if post
     message = PushWireProtocol::parse_post(post)
-    YammerProxy::post_yammer(message)
+    MessagingProxy::post_service(message)
   end
 end

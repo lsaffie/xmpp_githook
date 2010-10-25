@@ -1,0 +1,7 @@
+# config/config.yml
+
+production:
+  #Messaging service selector 
+  #yammer or jabber
+  service: jabber
+  jabber_recipients: ["lsaffie@jabber.telemonitoring.ca"]
