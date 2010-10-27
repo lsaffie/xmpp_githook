@@ -1,0 +1,62 @@
+= XmppNotifier
+
+I wrote this plugin to work with github's webhook service. It listens for 
+a post request on '/' and notifies either a Jabber server or Yammer
+
+The main configuration file is config/config.yml. You must edit this file before
+anything.
+
+One usage I have for this is with Github's webhook service
+I point the webhook to this application and watch the commit messages
+come through.
+
+If running this application as standalone, use rake start
+This will start the application and listen on port 9292. You may wish to proxy it
+with Apache, lighthttp or Ningx, your choice.
+
+== Using Jabber
+
+To get Jabber working just edit config/config.yml, set the service
+to jabber and populate the jabber_recipients arrays with the receiving
+email addresses
+
+This assumes that you have a jabber server already working. 
+
+Start the application and enjoy.
+
+== Using Yammer
+
+To be able to use it with Yammer, you'll need to create tokens and have the 
+application authorized in your Yammer network. I've included a script that 
+will make the token creation process easier. Here are the step by step instructions 
+to have your application authorized and tokens created.
+
+1. First we edit config/config.yml and set the service to "yammer" (no quotes)
+
+2. Go to this link and get your key and secret https://www.yammer.com/client_applications/new
+
+3. Edit o_auth_example.rb and entered your consumer_key and secret_key.
+
+4. ruby o_auth_example.rb request_token
+You'll get something like this:
+{"oauth_token_secret"=>"gGrldPFoa3kIr6Kz7C4DQe0hUxXFWQ24Qim1c48MC4",
+"oauth_callback_confirmed"=>"true",
+"oauth_token"=>"W9XroyIS6ZePW7qD8kAh5g"}
+
+5. Open browser to https://www.yammer.com/oauth/authorize?oauth_token=W9XroyIS6ZePW7qD8kAh5g
+Get back verifier code 1234
+
+6 ruby o_auth_example.rb access_token W9XroyIS6ZePW7qD8kAh5g gGrldPFoa3kIr6Kz7C4DQe0hUxXFWQ24Qim1c48MC4 123
+{"oauth_token_secret"=>"y7QP8oUq9NUpXmBs1q727SSqlX0EBzxmuEavbU7YA",
+"oauth_token"=>"OuSqrNQWQVm1LHHmNfmmg"}
+That's your oauth_token and secret
+
+7. Open oauth.yml and enter your key/secret from step 1 and token/secret from step 5
+
+8. Start the server with rake start
+
+9. Wait for someone to commit ;-)
+
+== Dependencies
+Bundler
+Ruby 1.9.x

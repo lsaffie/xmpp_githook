@@ -23,8 +23,8 @@ require 'pp'
 require 'net/http'
 require 'net/https'
 
-CONSUMER_KEY = 'A86WmN2OYR5IORUwQwV5kA'
-CONSUMER_SECRET = 'kCz5hYexulK9Bw9I8R1uvge9NKo97iRVgNUTtsfUIkA'
+CONSUMER_KEY = 'CqmJDFaWUMgJvhQxv8aOyA'
+CONSUMER_SECRET = 'ZRPdUI8qUBjopONUmmOvJC7WleEtOrgGveaKIDw'
 
 class OAuthExample
 
