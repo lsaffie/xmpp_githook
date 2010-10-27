@@ -10,7 +10,7 @@ One usage I have for this is with Github's webhook service
 I point the webhook to this application and watch the commit messages
 come through.
 
-If running this application as standalone, use rake start
+If running this application as standalone, use rake server:start
 This will start the application and listen on port 9292. You may wish to proxy it
 with Apache, lighthttp or Ningx, your choice.
 
@@ -53,7 +53,7 @@ That's your oauth_token and secret
 
 7. Open oauth.yml and enter your key/secret from step 1 and token/secret from step 5
 
-8. Start the server with rake start
+8. Start the server with rake server:start
 
 9. Wait for someone to commit ;-)
 
