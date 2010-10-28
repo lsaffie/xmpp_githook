@@ -3,7 +3,7 @@ class PushWireProtocol
     json = JSON.parse(post)
     commit = json["commits"][0]
     repo = json["repository"]
-    string = "#{commit['author']['name']} commited to #{repo['name']}. #{commit['message']}"
+    string = "#{commit['author']['name']} commited to #{repo['name']}. #{commit['message']}. #{commit['url']}"
     string
   end
 end

@@ -3,7 +3,7 @@ class MessagingProxy
   def self.post_yammer(message)
     require 'yammer4r'
     config_path = './oauth.yml'
-    yammer = Yammer::Client.new(:config => config_path)                                     
+    yammer = Yammer::Client.new(:config => config_path)
     yammer.message(:post,{:body => message})
   end
 
