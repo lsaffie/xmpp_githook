@@ -8,12 +8,24 @@ class MessagingProxy
   end
 
   def self.post_jabber(message)
-    require 'xmpp4r-simple'
-    jabber_recipients = APP_CONFIG['production']['jabber_recipients']
-    im = Jabber::Simple.new("user@jabber.telemonitoring.ca", "user")
-    jabber_recipients.each do |jabber_recipient|
-      im.deliver(jabber_recipient, message)
-    end
+    require 'xmpp4r'
+    require 'xmpp4r/muc'
+
+    sender = APP_CONFIG['production']['jabber_sender']
+    sender_password = APP_CONFIG['production']['jabber_sender_password']
+    receiver = APP_CONFIG['production']['jabber_recipients']
+    jabber_alias = APP_CONFIG['production']['jabber_alias']
+    
+    client = Jabber::Client.new(Jabber::JID.new(sender))
+    client.connect
+    client.auth(sender_password)
+
+    msg=Jabber::Message::new(nil, message)
+
+    muc = Jabber::MUC::MUCClient.new(client)
+    muc.join(Jabber::JID.new(receiver + '/' + jabber_alias))
+    muc.send(msg)
+    muc.exit()
   end
 
   def self.post_service(message)

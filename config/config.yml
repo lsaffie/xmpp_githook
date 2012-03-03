@@ -4,8 +4,11 @@ production:
   #Messaging service selector 
   #yammer or jabber
   # @Examples service: yammer   or service: jabber
-  service: yammer
+  service: jabber
 
   # Array of email addresses separated by comma when
   # use jabber as a service
-  jabber_recipients: ["lsaffie@jabber.telemonitoring.ca"]
+  jabber_recipients: "devs@conference.bedsideclinicalsystems.com"
+  jabber_sender: "codebot@bedsideclinicalsystems.com"
+  jabber_sender_password: "codebot"
+  jabber_alias: "devsbot"
