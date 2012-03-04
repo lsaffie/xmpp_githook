@@ -11,19 +11,16 @@ class MessagingProxy
     require 'xmpp4r'
     require 'xmpp4r/muc'
 
-    sender = APP_CONFIG['production']['jabber_sender']
-    sender_password = APP_CONFIG['production']['jabber_sender_password']
-    receiver = APP_CONFIG['production']['jabber_recipients']
-    jabber_alias = APP_CONFIG['production']['jabber_alias']
-    
-    client = Jabber::Client.new(Jabber::JID.new(sender))
+    config = Configuration.new
+
+    client = Jabber::Client.new(Jabber::JID.new(config.get('jabber_sender')))
     client.connect
-    client.auth(sender_password)
+    client.auth(config.get('jabber_sender_password'))
 
     msg=Jabber::Message::new(nil, message)
 
     muc = Jabber::MUC::MUCClient.new(client)
-    muc.join(Jabber::JID.new(receiver + '/' + jabber_alias))
+    muc.join(Jabber::JID.new(config.get('jabber_recipients') + '/' + config.get('jabber_alias')))
     muc.send(msg)
     muc.exit()
   end
