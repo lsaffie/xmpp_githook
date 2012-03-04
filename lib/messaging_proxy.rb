@@ -13,14 +13,14 @@ class MessagingProxy
 
     config = Configuration.new
 
-    client = Jabber::Client.new(Jabber::JID.new(config.get('jabber_sender')))
+    client = Jabber::Client.new(Jabber::JID.new(config.bot))
     client.connect
-    client.auth(config.get('jabber_sender_password'))
+    client.auth(config.bot_password)
 
     msg=Jabber::Message::new(nil, message)
 
     muc = Jabber::MUC::MUCClient.new(client)
-    muc.join(Jabber::JID.new(config.get('jabber_recipients') + '/' + config.get('jabber_alias')))
+    muc.join(Jabber::JID.new(config.recipients + '/' + config.bot_alias))
     muc.send(msg)
     muc.exit()
   end
